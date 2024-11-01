@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="icon" href="./assets/logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4the20's</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        @font-face {
+            src: url('/assets/HelveticaNeueItalic-CMrlZH4R.ttf');
+            font-family:'Helvetica-Regular';
+            font-style: oblique;
+        }
+        @font-face {
+            src: url('/assets/HelveticaNeueLightItalic-Ck-G_EAE.ttf');
+            font-family:'Helvetica-light';
+            font-style: oblique;
+        }
+        body {
+            font-family: Helvetica, sans-serif;
+            background-color: black;
+            color: white;
+            display: grid;
+            grid-template-columns: 15% 3fr 15%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .side-banner {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .side-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300%;
+            background: url('./assets/POSTER.png') space;
+            background-size: 100% auto;
+            animation: scrollInfinite 20s linear infinite;
+        }
+        @keyframes scrollInfinite {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        .header {
+            grid-column: 2;
+            background-color: red;
+            padding: 10px;
+            height: 20vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .header h1 {
+            color: white;
+            font-size: 2vw;
+        }
+        .middle-section {
+            grid-area: 1/2/1/3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: black;
+            height: 100%;
+            width: 95%;
+            margin-left: 2.5%;
+        }
+        .upper-container {
+            height: 25%;
+            margin-top: 2.5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1%;
+        }
+        .upper-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid white;
+            autoplay: true;
+            muted: true;
+            loop: true;
+            playsinline: true;
+        }
+        .lower-container {
+            height: 65%;
+            margin-bottom: 2.5%;
+            background-image: url('./assets/TLO.png');
+            background-position: 60% 100%;
+            background-size: 130%;
+            background: black;
+            border: 2px solid rgba(255, 255, 255, 0.443);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        .model-container {
+            width: 60%;
+            height: 100%;
+            position: relative;
+        }
+        .button-containter {
+            height: 5%;
+            width: 15%;
+            background: linear-gradient(to bottom, #000000, #373737);
+            border: 2px solid rgba(255, 255, 255, 0.443);
+            border-radius: 10px 10px 0px 0px;
+            margin-bottom: -3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .issue {
+            width: 70%;
+            margin-bottom: 2%;
+        }
+        .order-button-container {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+            margin-right: 10%;
+        }
+        .order-button-container h2 {
+            color: white;
+            font-family: 'Helvetica-light', sans-serif;
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 1.4;
+            text-align: left;
+        }
+        .order-button-container h1 {
+            font-family: 'Helvetica', sans-serif;
+            font-weight: 700;
+            font-size: 70px;
+        }
+        .order-button {
+            background: radial-gradient(#e66465, #FF1B3D);
+            color: white;
+            padding: 15px;
+            font-size: 2vw;
+            border: none;
+            cursor: pointer;
+            animation: blink 200ms infinite alternate;
+            border-radius: 10px;
+        }
+        .order-button:hover {
+            background-color: black;
+        }
+        @keyframes blink {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        @media screen and (max-width: 768px) {
+            .header h1 {
+                font-size: 5vw;
+            }
+            .order-button {
+                font-size: 5vw;
+                padding: 10px;
+            }
+        }
+        .video-container {
+            border: 2px solid rgba(255, 255, 255, 0.549);
+            border-radius: px;
+        }
+            @media screen and (max-width: 768px) {
+            .lower-container {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: auto;
+                padding: 20px;
+            }
+            .model-container {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 20px;
+            }
+            .order-button-container {
+                width: 100%;
+                text-align: center;
+                margin-right: 0;
+            }
+            .order-button-container h1 {
+                font-size: 8vw;
+            }
+            .order-button-container h2 {
+                font-size: 4vw;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .upper-container {
+                height: 30vh;
+            }
+            .lower-container {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 60vh;
+                padding: 20px;
+            }
+            .model-container {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 20px;
+            }
+            .order-button-container {
+                width: 100%;
+                text-align: center;
+                margin-right: 0;
+            }
+            .order-button-container h1 {
+                font-size: 8vw;
+            }
+            .order-button-container h2 {
+                font-size: 4vw;
+            }
+        }
+</style>
+    
+</head>
+<body>
+    <div class="side-banner"></div>
+    <div class="side-banner"></div>
+    <div class="middle-section">
+        <div class="upper-container">
+            <img class="video-container" src="./assets/4the20s.gif" alt="4th20s GIF" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="button-containter">003 ISSUE</div>
+        <div class="lower-container">
+            <div class="model-container">
+                <img src="./assets/magazine.gif" alt="Magazine GIF" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="order-button-container">
+                <h1>003 ISSUE</h1>
+                <h2>Krąży wokół ciała, emocji i kontrastów. Zawarte w nim teksty i składki graficzne opowiadają o cielesności i relacjach, odnajdywaniu swojej estetyki oraz budowaniu pewności siebie czy to poprzez własny styl, kreatywność lub performance.</h2>
+                <a href="https://zrzutka.pl/5jhx7v#" target="_blank"><button class="order-button">ORDER NOW!</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
