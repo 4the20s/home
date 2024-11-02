@@ -12,16 +12,16 @@
             margin: 0;
             cursor: none;
             padding: 0;
-            cursor: url('./assets/starcursor.png'),auto;
+            cursor: url('./assets/starcursor.png'), auto;
         }
         @font-face {
             src: url('/assets/HelveticaNeueItalic-CMrlZH4R.ttf');
-            font-family:'Helvetica-Regular';
+            font-family: 'Helvetica-Regular';
             font-style: oblique;
         }
         @font-face {
             src: url('/assets/HelveticaNeueLightItalic-Ck-G_EAE.ttf');
-            font-family:'Helvetica-light';
+            font-family: 'Helvetica-light';
             font-style: oblique;
         }
         body {
@@ -141,7 +141,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .issue {
             width: 70%;
             margin-bottom: 2%;
@@ -202,21 +201,22 @@
             .header h1 {
                 font-size: 5vw;
             }
+            .side-banner {
+                display: none;
+            }
+            .middle-section {
+                grid-area: 1/1/1/4;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                background-color: black;
+                height: 100%;
+                width: 95%;
+                margin-left: 2.5%;
+            }
             .order-button {
                 font-size: 5vw;
                 padding: 10px;
-            }
-            .lower-container {
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: auto;
-                padding: 20px;
-            }
-            .model-container {
-                width: 100%;
-                height: 200px;
-                margin-bottom: 10px;
             }
             .order-button-container {
                 width: 100%;
@@ -231,12 +231,10 @@
                 font-size: 4vw;
             }
             .button-containter {
-                width: 40%;
+                width: 25%;
                 height: 3%;
                 margin-top: 4%;
-            }
-            .upper-container {
-                height: 30vh;
+                font-size: 12px;
             }
             .lower-container {
                 flex-direction: column;
@@ -246,29 +244,17 @@
                 padding: 20px;
             }
             .model-container {
+                margin-bottom: -40px;
+                margin-top: -40px;
                 width: 100%;
-                height: 50vh;
-                margin-bottom: 20px;
             }
             .order-button-container {
                 width: 100%;
                 text-align: center;
                 margin-right: 0;
             }
-            .order-button-container h1 {
-                font-size: 8vw;
-            }
-            .order-button-container h2 {
-                font-size: 4vw;
-            }
-            body {
-                height: auto;
-            }
-            html {
-                height: auto;
-            }
             .upper-container {
-                height: 40vh;
+                height: 15vh;
             }
             .lower-container {
                 height: auto;
@@ -276,11 +262,6 @@
                 align-items: start;
                 justify-content: start;
                 padding: 20px;
-            }
-            .model-container {
-                width: 100%;
-                height: 50vh;
-                margin-bottom: 20px;
             }
             .order-button-container {
                 width: 100%;
@@ -301,12 +282,41 @@
             .order-button {
                 font-size: 5vw;
                 padding: 10px;
+                margin-bottom: 40px;
             }
         }
         .model-container img {
             width: 100%;
             height: 50vh;
             object-fit: cover;
+        }
+        /* Popup styles for small screen widths */
+        #popupCanvasContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        #popupCanvasContainer img {
+            max-width: 90%;
+            height: auto;
+        }
+        #closePopup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -325,11 +335,18 @@
             </div>
             <div class="order-button-container">
                 <h1>003 ISSUE</h1>
-                <h2>Krąży wokół ciała, emocji i kontrastów. Zawarte w nim teksty i składki graficzne opowiadają o cielesności i relacjach, odnajdywaniu swojej estetyki oraz budowaniu pewności siebie czy to poprzez własny styl, kreatywność lub performance.</h2>
+                <h2>Krąży wokół ciała, emocji i kontrastów. <br>Zawarte w nim teksty i składki graficzne opowiadają o cielesności i relacjach, odnajdywaniu swojej estetyki oraz budowaniu pewności siebie czy to poprzez własny styl, kreatywność lub performance.</h2>
                 <a href="https://zrzutka.pl/5jhx7v#" target="_blank"><button class="order-button">ORDER NOW!</button></a>
             </div>
         </div>
     </div>
+    
+    <!-- Popup Container for Small Screen Widths -->
+    <div id="popupCanvasContainer">
+        <img src="./assets/POSTER.png" alt="Popup Poster">
+        <button id="closePopup">&times;</button>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const customCursor = document.getElementById('customCursor');
@@ -348,6 +365,22 @@
                     cursorImage.remove();
                 }, 300);
             });
+
+            // Popup Logic Based on Screen Width
+            const popupCanvasContainer = document.getElementById('popupCanvasContainer');
+            const closePopup = document.getElementById('closePopup');
+
+            if (window.innerWidth <= 768) {
+                // Show the popup 1 second after page load for small screen widths
+                setTimeout(() => {
+                    popupCanvasContainer.style.display = 'flex';
+                }, 1000);
+
+                // Close the popup when the close button is clicked
+                closePopup.addEventListener('click', () => {
+                    popupCanvasContainer.style.display = 'none';
+                });
+            }
         });
     </script>
 </body>
