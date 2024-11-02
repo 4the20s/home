@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="icon" href="./assets/logo.png" type="image/x-icon">
+<head>
+    <link rel="icon" href="./assets/logo.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4the20's</title>
@@ -9,7 +10,9 @@
         * {
             box-sizing: border-box;
             margin: 0;
+            cursor: none;
             padding: 0;
+            cursor: url('./assets/starcursor.png'),auto;
         }
         @font-face {
             src: url('/assets/HelveticaNeueItalic-CMrlZH4R.ttf');
@@ -28,11 +31,28 @@
             display: grid;
             grid-template-columns: 15% 3fr 15%;
             height: 100vh;
-            overflow: hidden;
+            position: relative;
+        }
+        .custom-cursor {
+            position: absolute;
+            background-size: cover;
+        }
+        .cursor-image {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('./assets/star.png');
+            background-size: cover;
+            pointer-events: none;
+            animation: fadeOut 300ms ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
         }
         .side-banner {
             position: relative;
-            height: 100vh;
+            height: auto;
             overflow: hidden;
         }
         .side-banner::before {
@@ -153,7 +173,6 @@
             padding: 15px;
             font-size: 2vw;
             border: none;
-            cursor: pointer;
             animation: blink 200ms infinite alternate;
             border-radius: 10px;
         }
@@ -169,7 +188,17 @@
             width: 100%;
             height: auto;
         }
+        .video-container {
+            border: 2px solid rgba(255, 255, 255, 0.549);
+            border-radius: px;
+        }
         @media screen and (max-width: 768px) {
+            html {
+                height: auto;
+            }
+            body {
+                height: auto;
+            }
             .header h1 {
                 font-size: 5vw;
             }
@@ -177,12 +206,6 @@
                 font-size: 5vw;
                 padding: 10px;
             }
-        }
-        .video-container {
-            border: 2px solid rgba(255, 255, 255, 0.549);
-            border-radius: px;
-        }
-            @media screen and (max-width: 768px) {
             .lower-container {
                 flex-direction: column;
                 align-items: center;
@@ -193,7 +216,7 @@
             .model-container {
                 width: 100%;
                 height: 200px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
             .order-button-container {
                 width: 100%;
@@ -202,12 +225,16 @@
             }
             .order-button-container h1 {
                 font-size: 8vw;
+                text-align: left;
             }
             .order-button-container h2 {
                 font-size: 4vw;
             }
-        }
-        @media screen and (max-width: 768px) {
+            .button-containter {
+                width: 40%;
+                height: 3%;
+                margin-top: 4%;
+            }
             .upper-container {
                 height: 30vh;
             }
@@ -220,7 +247,7 @@
             }
             .model-container {
                 width: 100%;
-                height: 200px;
+                height: 50vh;
                 margin-bottom: 20px;
             }
             .order-button-container {
@@ -234,11 +261,57 @@
             .order-button-container h2 {
                 font-size: 4vw;
             }
+            body {
+                height: auto;
+            }
+            html {
+                height: auto;
+            }
+            .upper-container {
+                height: 40vh;
+            }
+            .lower-container {
+                height: auto;
+                flex-direction: column;
+                align-items: start;
+                justify-content: start;
+                padding: 20px;
+            }
+            .model-container {
+                width: 100%;
+                height: 50vh;
+                margin-bottom: 20px;
+            }
+            .order-button-container {
+                width: 100%;
+                text-align: center;
+                margin-right: 0;
+            }
+            .order-button-container h1 {
+                font-size: 8vw;
+            }
+            .order-button-container h2 {
+                font-size: 4vw;
+            }
+            .order-button-container a {
+                display: flex;
+                justify-items: start;
+                text-decoration: none;
+            }
+            .order-button {
+                font-size: 5vw;
+                padding: 10px;
+            }
         }
-</style>
-    
+        .model-container img {
+            width: 100%;
+            height: 50vh;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
+    <div class="custom-cursor" id="customCursor"></div>
     <div class="side-banner"></div>
     <div class="side-banner"></div>
     <div class="middle-section">
@@ -257,5 +330,25 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const customCursor = document.getElementById('customCursor');
+
+            document.addEventListener('mousemove', function(e) {
+                customCursor.style.left = e.pageX + 'px';
+                customCursor.style.top = e.pageY + 'px';
+
+                const cursorImage = document.createElement('div');
+                cursorImage.classList.add('cursor-image');
+                cursorImage.style.left = (e.pageX + 5) + 'px';
+                cursorImage.style.top = (e.pageY + 5) + 'px';
+                document.body.appendChild(cursorImage);
+
+                setTimeout(() => {
+                    cursorImage.remove();
+                }, 300);
+            });
+        });
+    </script>
 </body>
 </html>
