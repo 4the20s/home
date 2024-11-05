@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <link rel="icon" href="./assets/logo.png" type="image/x-icon">
     <meta charset="UTF-8">
@@ -101,15 +101,11 @@
             justify-content: center;
             margin-bottom: 1%;
         }
-        .upper-container video {
+        .upper-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border: 2px solid white;
-            autoplay: true;
-            muted: true;
-            loop: true;
-            playsinline: true;
         }
         .lower-container {
             height: 65%;
@@ -304,7 +300,7 @@
             height: 50vh;
             object-fit: cover;
         }
-        /* Popup styles for small screen widths */
+        /* Popup styles */
         #popupCanvasContainer {
             display: none;
             position: fixed;
@@ -354,16 +350,17 @@
                 <h1>003 ISSUE</h1>
                 <h2>Krąży wokół ciała, emocji i kontrastów. <br>Zawarte w nim teksty i składki graficzne opowiadają o cielesności i relacjach, odnajdywaniu swojej estetyki oraz budowaniu pewności siebie czy to poprzez własny styl, kreatywność lub performance.</h2>
                 <div class="order-button-wrapper">
-                    <a href="https://zrzutka.pl/5jhx7v#" target="_blank"><button class="order-button">ORDER NOW!</button></a>
-                    
+                    <a href="https://zrzutka.pl/erwfer" target="_blank"><button class="order-button">ORDER NOW!</button></a>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Popup Container for Small Screen Widths -->
+    <!-- Popup Container -->
     <div id="popupCanvasContainer">
-        <img src="./assets/POSTER.png" alt="Popup Poster">
+        <a href="https://www.facebook.com/events/4021903128132107/?notif_id=1730754391858373&notif_t=plan_edited&ref=notif" target="_blank">
+            <img src="./assets/POSTER.png" alt="Popup Poster">
+        </a>
         <button id="closePopup">&times;</button>
     </div>
 
@@ -386,21 +383,19 @@
                 }, 300);
             });
 
-            // Popup Logic Based on Screen Width
+            // Logika popupu
             const popupCanvasContainer = document.getElementById('popupCanvasContainer');
             const closePopup = document.getElementById('closePopup');
 
-            if (window.innerWidth <= 768) {
-                // Show the popup 1 second after page load for small screen widths
-                setTimeout(() => {
-                    popupCanvasContainer.style.display = 'flex';
-                }, 1000);
+            // Pokaż popup 1 sekundę po załadowaniu strony
+            setTimeout(() => {
+                popupCanvasContainer.style.display = 'flex';
+            }, 1000);
 
-                // Close the popup when the close button is clicked
-                closePopup.addEventListener('click', () => {
-                    popupCanvasContainer.style.display = 'none';
-                });
-            }
+            // Zamknij popup po kliknięciu przycisku zamknięcia
+            closePopup.addEventListener('click', () => {
+                popupCanvasContainer.style.display = 'none';
+            });
         });
     </script>
 </body>
