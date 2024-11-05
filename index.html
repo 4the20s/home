@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4the20's</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
+        /* Istniejące style */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -32,6 +32,15 @@
             grid-template-columns: 15% 3fr 15%;
             height: 100vh;
             position: relative;
+        }
+        h2 {
+            font-family: 'Helvetica-light';
+        }
+        h1 {
+            font-family: 'Helvetica-Regular';
+        }
+        a {
+            font-family: 'Helvetica-Regular';
         }
         .custom-cursor {
             position: absolute;
@@ -70,19 +79,6 @@
             0% { transform: translateY(0); }
             100% { transform: translateY(-50%); }
         }
-        .header {
-            grid-column: 2;
-            background-color: red;
-            padding: 10px;
-            height: 20vh;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        .header h1 {
-            color: white;
-            font-size: 2vw;
-        }
         .middle-section {
             grid-area: 1/2/1/3;
             display: flex;
@@ -110,21 +106,24 @@
         .lower-container {
             height: 65%;
             margin-bottom: 2.5%;
-            background-image: url('./assets/TLO.png');
-            background-position: 60% 100%;
-            background-size: 130%;
             background: black;
             border: 2px solid rgba(255, 255, 255, 0.443);
             border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             position: relative;
+            overflow: hidden;
         }
         .model-container {
-            width: 60%;
+            width: 50%; /* Zmieniono na 50% */
             height: 100%;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .model-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Zmieniono na contain */
         }
         .button-containter {
             width: 15%;
@@ -134,35 +133,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
-        .issue {
-            width: 70%;
-            margin-bottom: 2%;
+        .button-containter.active {
+            background-color: #333;
         }
         .order-button-container {
             width: 60%;
             display: flex;
             flex-direction: column;
-            align-items: left;
+            align-items: center;
             justify-content: center;
             margin-right: 7%;
         }
-        .order-button-container h2 {
+        h2 {
             color: white;
             font-family: 'Helvetica-light', sans-serif;
             margin-bottom: 20px;
             font-size: 20px;
             line-height: 1.3;
-            text-align: left;
             letter-spacing: -0.5px;
             text-align: center;
         }
-        .order-button-container h1 {
+        .h1 {
             font-family: 'Helvetica-regular', sans-serif;
             font-weight: 700;
             font-size: 70px;
             letter-spacing: -3px;
             text-align: center;
+        }
+        a {
+            font-size: 2vw;
         }
         .order-button-wrapper {
             display: flex;
@@ -176,6 +177,7 @@
             flex-direction: row;
             margin-bottom: -2px;
             gap: 5px;
+            justify-content: center;
         }
         .order-button {
             background: radial-gradient(#e66465, #FF1B3D);
@@ -185,6 +187,7 @@
             border: none;
             animation: blink 200ms infinite alternate;
             border-radius: 15px;
+            cursor: pointer;
         }
         .order-button:hover {
             background-color: black;
@@ -193,14 +196,28 @@
             0% { transform: scale(1); }
             100% { transform: scale(1.05); }
         }
-        canvas {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
         .video-container {
             border: 2px solid rgba(255, 255, 255, 0.549);
-            border-radius: px;
+        }
+        /* Style dla treści zakładek */
+        .tabcontent {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            animation: fadeEffect 0.5s;
+            color: white;
+        }
+        .tabcontent.active {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around; /* Zmieniono na space-around */
+            padding: 20px;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
         @media screen and (max-width: 768px) {
             html {
@@ -209,19 +226,11 @@
             body {
                 height: auto;
             }
-            .header h1 {
-                font-size: 8vw;
-            }
             .side-banner {
                 display: none;
             }
             .middle-section {
                 grid-area: 1/1/1/4;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                background-color: black;
-                height: 100%;
                 width: 95%;
                 margin-left: 2.5%;
             }
@@ -236,9 +245,9 @@
             }
             .order-button-container h1 {
                 font-size: 8vw;
-                text-align: left;
+                text-align: center;
             }
-            .order-button-container h2 {
+            h2 {
                 font-size: 4vw;
             }
             .button-containter {
@@ -250,42 +259,16 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                height: 60vh;
-                padding: 20px;
+                height: 100vh;
             }
             .model-container {
-                margin-bottom: -40px;
-                margin-top: -40px;
-                width: 100%;
-            }
-            .button-containter {
-                height: 100%;
-            }
-            .order-button-container {
-                width: 100%;
-                text-align: center;
-                margin-right: 0;
+                width: 100%; /* Pełna szerokość na mobile */
+                margin-bottom: -50px; /* Odstęp poniżej GIF-a */
             }
             .upper-container {
                 height: 15vh;
             }
-            .lower-container {
-                height: auto;
-                flex-direction: column;
-                align-items: start;
-                justify-content: start;
-                padding: 20px;
-            }
-            .order-button-container h1 {
-                text-align: center;
-                font-size: 12vw;
-            }
-            .order-button-container h2 {
-                font-size: 4vw;
-            }
             .order-button-container a {
-                display: flex;
-                justify-items: start;
                 text-decoration: none;
             }
             .order-button {
@@ -294,13 +277,16 @@
                 padding: 10px;
                 margin-bottom: 40px;
             }
+            .tabcontent.active {
+                flex-direction: column; /* Kolejność: GIF, tekst, przycisk */
+                align-items: center;
+            }
+            a {
+                font-size: 5vw;
+            }
         }
-        .model-container img {
-            width: 100%;
-            height: 50vh;
-            object-fit: cover;
-        }
-        /* Popup styles */
+        /* Usunięto niepotrzebny styl dla .model-container img, ponieważ jest już ustawiony wyżej */
+        /* Style dla popupu */
         #popupCanvasContainer {
             display: none;
             position: fixed;
@@ -332,38 +318,60 @@
 </head>
 <body>
     <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Sidebary -->
     <div class="side-banner"></div>
     <div class="side-banner"></div>
+
+    <!-- Główna sekcja -->
     <div class="middle-section">
+        <!-- Górny kontener -->
         <div class="upper-container">
-            <img class="video-container" src="./assets/4the20s.gif" alt="4th20s GIF" style="width: 100%; height: 100%; object-fit: cover;">
+            <img class="video-container" src="./assets/4the20s.gif" alt="4th20s GIF">
         </div>
+
+        <!-- Kontener przycisków jako zakładki -->
         <div class="button-containter-wrapper">
-            <div class="button-containter">003 ISSUE</div>
-            <div class="button-containter" style="color: grey">SOON</div>
+            <div class="button-containter tablinks active" onclick="openTab(event, 'Issue')">003 ISSUE</div>
+            <div class="button-containter tablinks" onclick="openTab(event, 'Info')" style="color: grey">SOON</div>
         </div>
+
+        <!-- Dolny kontener z treścią zakładek -->
         <div class="lower-container">
-            <div class="model-container">
-                <img src="./assets/magazine.gif" alt="Magazine GIF" style="width: 100%; height: 100%; object-fit: cover;">
+            <!-- Zakładka '003 ISSUE' -->
+            <div id="Issue" class="tabcontent active">
+                <div class="model-container">
+                    <img src="./assets/magazine.gif" alt="Magazine GIF">
+                </div>
+                <div class="order-button-container">
+                    <h1>003 ISSUE</h1>
+                    <h2>Krąży wokół ciała, emocji i kontrastów. <br>Zawarte w nim teksty i składki graficzne opowiadają o cielesności i relacjach, odnajdywaniu swojej estetyki oraz budowaniu pewności siebie czy to poprzez własny styl, kreatywność lub performance.</h2>
+                    <div class="order-button-wrapper">
+                        <a href="https://zrzutka.pl/erwfer" target="_blank"><button class="order-button">ORDER NOW!</button></a>
+                    </div>
+                </div>
             </div>
-            <div class="order-button-container">
-                <h1>003 ISSUE</h1>
-                <h2>Krąży wokół ciała, emocji i kontrastów. <br>Zawarte w nim teksty i składki graficzne opowiadają o cielesności i relacjach, odnajdywaniu swojej estetyki oraz budowaniu pewności siebie czy to poprzez własny styl, kreatywność lub performance.</h2>
-                <div class="order-button-wrapper">
-                    <a href="https://zrzutka.pl/erwfer" target="_blank"><button class="order-button">ORDER NOW!</button></a>
+
+            <!-- Zakładka 'INFO' -->
+            <div id="Info" class="tabcontent">
+                <div class="info-content" style="text-align: center; padding: 50px;">
+                    <h1>𝟰𝗧𝗛𝗘𝟮𝟬𝗦</h1>
+                    <h2>to budowana przez 3 dziewczyny niezależna inicjatywa tworząca platformy do rozwoju, promocji i inspiracji twórców, z każdej możliwej dziedziny sztuki. Zrzeszamy początkujących oraz doświadczonych artystów we wspólnych działaniach przy papierowych wydaniach, imprezach oraz wystawach, a także łączymy ich z doświadczonymi mentorami z branży kreatywnej, aby wesprzeć ich rozwój.</h2>
+                    <a href="https://www.instagram.com/for4the20s/" target="_blank" style="color: #FF1B3D;">@for4the20s</a>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Popup Container -->
+
+    <!-- Kontener popupu -->
     <div id="popupCanvasContainer">
-        <a href="https://www.facebook.com/events/4021903128132107/?notif_id=1730754391858373&notif_t=plan_edited&ref=notif" target="_blank">
+        <a href="https://www.facebook.com/events/4021903128132107/" target="_blank">
             <img src="./assets/POSTER.png" alt="Popup Poster">
         </a>
         <button id="closePopup">&times;</button>
     </div>
 
+    <!-- Skrypty -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const customCursor = document.getElementById('customCursor');
@@ -387,16 +395,32 @@
             const popupCanvasContainer = document.getElementById('popupCanvasContainer');
             const closePopup = document.getElementById('closePopup');
 
-            // Pokaż popup 1 sekundę po załadowaniu strony
             setTimeout(() => {
                 popupCanvasContainer.style.display = 'flex';
             }, 1000);
 
-            // Zamknij popup po kliknięciu przycisku zamknięcia
             closePopup.addEventListener('click', () => {
                 popupCanvasContainer.style.display = 'none';
             });
         });
+
+        // Funkcjonalność zakładek
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName('tabcontent');
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove('active');
+            }
+
+            tablinks = document.getElementsByClassName('tablinks');
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove('active');
+            }
+
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
     </script>
 </body>
 </html>
